@@ -1,0 +1,19 @@
+.container {
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    flex-direction: column;
+}
+
+.container label {
+    font-size: 20px;
+    margin: 10px;
+}
+
+.container input {
+    padding: 5px;
+}
+
+.container button {
+    margin-top: 20px;
+}
