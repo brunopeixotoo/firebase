@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { db } from './firebaseConnection';
-import { doc, setDoc} from 'firebase/firestore';
+import { doc, setDoc, collection, addDoc, getDoc} from 'firebase/firestore';
 
 import './App.css';
 
@@ -11,18 +11,39 @@ function App() {
 
 
   async function handleAdd() {
-    await setDoc(doc(db, "posts", "12345"), {
-      título: titulo,
+  
+    await addDoc(collection(db, "posts"), {
+      titulo: titulo,
       autor: autor
     })
     .then(()=>{
       console.log('Dados registrados no banco');
+      setAutor('');
+      setTitulo('');
     })
     .catch((error)=>{
       console.log('[function handleAdd] Error: ', error);
     })
+
+
   }
-  
+
+  async function buscaPost() {
+    
+    const postRef = doc(db, "posts", "0tCDFtP4mNE2jjoTsdnC");
+
+    await getDoc(postRef)
+    .then((snapshot)=>{
+      setTitulo(snapshot.data().titulo);
+      setAutor(snapshot.data().autor);
+    })
+    .catch((error)=>{
+      console.log('[function buscaPost] Error: ', error);
+    })
+
+
+  }
+
   
   return (
     <div>
@@ -45,6 +66,7 @@ function App() {
         />
 
         <button onClick={handleAdd}>Cadastrar</button>
+        <button onClick={buscaPost}>Buscar posts</button>
       </div>
 
     </div>
