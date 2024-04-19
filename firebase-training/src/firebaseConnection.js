@@ -1,7 +1,9 @@
 //Importanto o app
 import { initializeApp } from 'firebase/app'; 
 //Importando o banco de dados
-import { getFirestore } from 'firebase/firestore'; //
+import { getFirestore } from 'firebase/firestore';
+//Importando criação de usuários por autenticação
+import { getAuth } from 'firebase/auth';
 
 
 //Configuração que tem no Firebase
@@ -20,7 +22,8 @@ const firebaseApp = initializeApp(firebaseConfig);
 
 //Agora é só inicializar a configuração. Peguei a configuração acima e depois inicializei com o getFirestore.
 const db = getFirestore(firebaseApp);
+const auth = getAuth(firebaseApp)
 
 //Exportando a nossa inicialização da configuração
 //Para conectar com o Firestore
-export { db };
+export { db, auth };
